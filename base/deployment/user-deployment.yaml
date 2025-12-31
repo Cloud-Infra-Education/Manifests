@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  namespace: formation-lap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - name: user-service
+          image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/user-service:aec1b2e958a2dda7598df5b9e7fafb339975c7a9
+          ports:
+            - containerPort: 8000
