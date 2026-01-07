@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: product-service
-          image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/product-service:aec1b2e958a2dda7598df5b9e7fafb339975c7a9
+          image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/product-service:e66850e42121159146ebda4c73b0fd4707682d6a
           ports:
             - containerPort: 8000
