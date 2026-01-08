@@ -22,12 +22,12 @@ spec:
         ports:
         - containerPort: 8000
         env:
-        - name: DB_HOST
+        - name: RDS_PROXY_SEOUL
           value: "formation-lap-kor-rds-proxy.proxy-c902seqsaaps.ap-northeast-2.rds.amazonaws.com"
         - name: DB_USER
-          value: "admin"
+          value: "proxy_admin"
         - name: DB_PASS  # DB_PASSWORD에서 DB_PASS로 수정 (코드와 일치)
-          value: "StrongPassword123!"
+          value: "test1234"
         - name: DB_NAME  # mydb에서 ott_db로 수정 (코드와 일치)
           value: "ott_db"
         - name: REGION_NAME
