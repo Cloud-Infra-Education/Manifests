@@ -1,21 +1,13 @@
-# ~/Manifests/seoul/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- ott-networks.yaml
-- ott-services.yaml
+  - ../base
 
-# 파이썬 코드와 맞추기 위한 환경변수 강제 주입 (ConfigMap 대신 사용 가능)
-commonLabels:
-  app: ott-users
-
-  # Deployment에 써놓은 이미지 주소를 찾아서 우리가 방금 만든 최신 주소로 바꿉니다.
 images:
-- name: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/ott-users
-  newName: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
-  newTag: v3
-- name: ott-user-app
-  newName: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
-  newTag: v3
+  - name: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
+    newTag: v3
+
+  - name: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/ott-content
+    newTag: v3
 
