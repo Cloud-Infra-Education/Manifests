@@ -1,13 +1,13 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: ott-users
+  name: user-service
+  namespace: formation-lap
 spec:
-  template:
-    spec:
-      containers:
-      - name: ott-users
-        image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
-        command: ["uvicorn"]
-        args: ["main:app", "--host", "0.0.0.0", "--port", "8000"]
+  type: ClusterIP
+  selector:
+    app: ott-users
+  ports:
+    - port: 8000
+      targetPort: 8000
 

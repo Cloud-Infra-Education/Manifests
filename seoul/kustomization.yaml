@@ -8,6 +8,3 @@ images:
   - name: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
     newTag: v4
 
-  - name: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/ott-content
-    newTag: v4
-
