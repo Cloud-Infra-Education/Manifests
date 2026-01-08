@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: ott-users
   namespace: formation-lap
-  labels:
-    app: ott-users
 spec:
   replicas: 1
   selector:
@@ -17,9 +15,14 @@ spec:
     spec:
       containers:
         - name: ott-users
-          image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
+          image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service:v4
           command: ["uvicorn"]
-          args: ["main:app", "--host", "0.0.0.0", "--port", "8000"]
-          ports:
-            - containerPort: 8000
+          args:
+            - main:app
+            - --host
+            - 0.0.0.0
+            - --port
+            - "8000"
+            - --root-path
+            - /users
 
