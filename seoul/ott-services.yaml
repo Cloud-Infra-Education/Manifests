@@ -18,7 +18,7 @@ spec:
       containers:
       - name: ott-users
         # 이 주소는 kustomization.yaml에 의해 y2om-user-service로 바뀝니다.
-        image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/ott-users:latest
+        image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/ott-users:v3
         ports:
         - containerPort: 8000
         env:
@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
       - name: ott-content
-        image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/ott-content:latest
+        image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/ott-content:v3
         ports:
         - containerPort: 8000
         env:
