@@ -14,7 +14,7 @@ commonLabels:
 images:
 - name: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/ott-users
   newName: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
-  newTag: latest
+  newTag: v2
 - name: ott-user-app
   newName: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
   newTag: v1
