@@ -3,7 +3,10 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
+  - fastapi-internal-token-secret.yaml
   - deployment/user-deployment.yaml
+  - deployment/video-deployment.yaml
   - services/user-service.yaml
+  - services/video-service.yaml
   - ingress.yaml
 
