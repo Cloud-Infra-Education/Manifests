@@ -1,20 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
+  name: ott-users
   namespace: formation-lap
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: ott-users
   template:
     metadata:
       labels:
-        app: user-service
+        app: ott-users
     spec:
       containers:
-        - name: user-service
-          image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/user-service:cd29ef94a1b80fc66e92d1054adad330c6639e5a
+        - name: ott-users
+          image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service:v4
+          command: ["uvicorn"]
+          args:
+            - main:app
+            - --host
+            - 0.0.0.0
+            - --port
+            - "8000"
           ports:
             - containerPort: 8000
+          env:
+            - name: INTERNAL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: fastapi-internal-token
+                  key: INTERNAL_TOKEN

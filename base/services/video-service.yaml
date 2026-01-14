@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: video-service
   namespace: formation-lap
 spec:
   selector:
-    app: ott-users
+    app: video-service
   ports:
-    - port: 8000
-      targetPort: 8000
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
   type: ClusterIP
-
