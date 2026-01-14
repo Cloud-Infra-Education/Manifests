@@ -23,10 +23,11 @@ spec:
             - 0.0.0.0
             - --port
             - "8000"
+          ports:
+            - containerPort: 8000
           env:
             - name: INTERNAL_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: fastapi-internal-token
                   key: INTERNAL_TOKEN
-

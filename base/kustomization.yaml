@@ -5,8 +5,12 @@ resources:
   - namespace.yaml
   - fastapi-internal-token-secret.yaml
   - deployment/user-deployment.yaml
+  - deployment/order-deployment.yaml
+  - deployment/product-deployment.yaml
   - deployment/video-deployment.yaml
   - services/user-service.yaml
+  - services/order-service.yaml
+  - services/product-service.yaml
   - services/video-service.yaml
   - ingress.yaml
 
