@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ott-users
-          image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service:v4
+          image: 087730891580.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service:v4
           command: ["uvicorn"]
           args:
             - main:app
@@ -23,4 +23,20 @@ spec:
             - 0.0.0.0
             - --port
             - "8000"
+          envFrom:
+            - configMapRef:
+                name: db-config
+            - secretRef:
+                name: db-secret
+          ports:
+            - containerPort: 8000
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
 
