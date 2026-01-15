@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: formation-lap
+data:
+  DB_HOST: "y2om-formation-lap-kor-rds-proxy.proxy-c902seqsaaps.ap-northeast-2.rds.amazonaws.com"
+  DB_USER: "proxy_admin"
+  DB_NAME: "ott_db"
+  REGION_NAME: "ap-northeast-2"
