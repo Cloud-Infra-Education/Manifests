@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
+  - configmap/db-config.yaml
+  - secret/db-secret.yaml
   - deployment/user-deployment.yaml
   - services/user-service.yaml
   - ingress.yaml
