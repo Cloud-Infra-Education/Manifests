@@ -8,4 +8,5 @@ resources:
   - deployment/user-deployment.yaml
   - services/user-service.yaml
   - ingress.yaml
+  - backend-api
 
