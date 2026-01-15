@@ -5,12 +5,12 @@ resources:
   - namespace.yaml
   - configmap/db-config.yaml
   - secret/db-secret.yaml
-  - deployment/user-deployment.yaml
-  - services/user-service.yaml
   - ingress.yaml
   - backend-api/serviceaccount.yaml
   - backend-api/configmap.yaml
   - backend-api/secret.yaml
   - backend-api/deployment.yaml
   - backend-api/service.yaml
+  - user-service/deployment.yaml
+  - user-service/service.yaml
 
