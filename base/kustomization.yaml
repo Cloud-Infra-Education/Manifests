@@ -13,8 +13,4 @@ resources:
   - backend-api/service.yaml
   - user-service/deployment.yaml
   - user-service/service.yaml
-  - deployment/order-deployment.yaml
-  - deployment/product-deployment.yaml
-  - services/order-service.yaml
-  - services/product-service.yaml
 
