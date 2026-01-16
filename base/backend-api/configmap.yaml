@@ -18,7 +18,7 @@ data:
   JWT_ALGORITHM: "RS256"
   MEILISEARCH_URL: "http://meilisearch-service:7700"
   DB_PORT: "3306"
-  DB_NAME: "y2om_db"
+  DB_NAME: "ott_db"
   S3_BUCKET_NAME: "y2om-my-origin-bucket-087730891580"
   S3_REGION: "ap-northeast-2"
   CLOUDFRONT_DOMAIN: "www.exampleott.click"
