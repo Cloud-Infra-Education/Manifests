@@ -43,6 +43,20 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
+          - path: /openapi.json
+            pathType: Exact
+            backend:
+              service:
+                name: backend-api-service
+                port:
+                  number: 8000
+          - path: /videos
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-api-service
+                port:
+                  number: 8000
           - path: /users
             pathType: Prefix
             backend:
