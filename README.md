@@ -133,7 +133,7 @@ base/
 
 ## 🛠️ 문제 해결
 
-### Pod가 시작되지 않는 경우
+### Pod가 시작되지 않는 경우    
 1. ArgoCD 웹 UI에서 Application 상태 확인
 2. Pod 로그 확인: `kubectl logs -n formation-lap <pod-name>`
 3. 이벤트 확인: `kubectl describe pod -n formation-lap <pod-name>`
@@ -148,6 +148,3 @@ base/
 - `base/kustomization.yaml` 파일의 리소스 경로 확인
 - 저장소에 모든 파일이 푸시되었는지 확인
 
-## 📞 연락처
-
-문제가 발생하면 ArgoCD 웹 UI 또는 Kubernetes 클러스터 관리자에게 문의하세요.
