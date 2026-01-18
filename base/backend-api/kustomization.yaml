@@ -1,15 +1,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-labels:
-  - includeSelectors: true
-    pairs:
-      app: backend-api
-      managed-by: argocd
+namespace: formation-lap
 
 resources:
+  - namespace.yaml
   - serviceaccount.yaml
   - configmap.yaml
   - secret.yaml
   - deployment.yaml
   - service.yaml
+
+labels:
+  - includeSelectors: true
+    pairs:
+      app: backend-api
+      managed-by: argocd
