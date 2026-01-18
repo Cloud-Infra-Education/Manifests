@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: ott-users
-          image: 087730891580.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service:v4
+          image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service:v4
           command: ["uvicorn"]
           args:
             - main:app
