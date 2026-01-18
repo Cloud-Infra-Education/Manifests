@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-config
+  namespace: formation-lap
+data:
+  KEYCLOAK_URL: "https://api.exampleott.click/keycloak"
+  KEYCLOAK_REALM: "formation-lap"
+  KEYCLOAK_CLIENT_ID: "backend-client"

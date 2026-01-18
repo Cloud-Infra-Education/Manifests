@@ -4,7 +4,9 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - configmap/db-config.yaml
+  - configmap/keycloak-config.yaml
   - secret/db-secret.yaml
+  - secret/keycloak-secret.yaml
   - ingress.yaml
   - backend-api/serviceaccount.yaml
   - backend-api/configmap.yaml
@@ -13,4 +15,3 @@ resources:
   - backend-api/service.yaml
   - user-service/deployment.yaml
   - user-service/service.yaml
-
