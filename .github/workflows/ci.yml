@@ -1,0 +1,75 @@
+name: CI - Validate Manifests & Trivy Security Scan
+
+on:
+  push:
+    branches:
+      - main
+      - "feat/#*"
+  pull_request:
+    branches:
+      - main
+      - "feat/#*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ================= [1] YAML 파일 문법 검증 =================
+      - name: Validate YAML syntax
+        run: |
+          echo "🔍 Validating YAML files..."
+          find . -name "*.yaml" -o -name "*.yml" | while read file; do
+            echo "Checking: $file"
+            python3 -c "import yaml; yaml.safe_load(open('$file'))" || exit 1
+          done
+          echo "✅ All YAML files are valid!"
+
+      # ================= [2] Kubernetes YAML 검증 (kubectl) =================
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Validate Kubernetes manifests
+        run: |
+          echo "🔍 Validating Kubernetes manifests..."
+          find base -name "*.yaml" -o -name "*.yml" | while read file; do
+            echo "Validating: $file"
+            kubectl apply --dry-run=client -f "$file" || exit 1
+          done
+          echo "✅ All Kubernetes manifests are valid!"
+
+      # ================= [3] Trivy 보안 스캔 단계 =================
+      - name: Run Trivy vulnerability scanner (Filesystem)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+
+      # ================= [4] Trivy Config 스캔 (Kubernetes 설정 파일) =================
+      - name: Run Trivy config scanner (Kubernetes)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: 'base/'
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+        continue-on-error: false
+
+      # ================= [참고] ArgoCD 자동 배포 =================
+      - name: Workflow completed
+        run: |
+          echo "✅ All validations passed!"
+          echo "📦 ArgoCD will automatically detect and deploy the changes."
+          echo "🔗 Check ArgoCD Application status after push."
