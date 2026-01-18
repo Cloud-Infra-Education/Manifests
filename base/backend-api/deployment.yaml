@@ -19,7 +19,7 @@ spec:
       serviceAccountName: backend-api-sa
       containers:
       - name: backend-api
-        image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/backend-api:latest
+        image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/backend-api:da3c0f679a1cd2523b3b3dd782779bdbe1e45a1a
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
