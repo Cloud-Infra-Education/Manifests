@@ -5,6 +5,7 @@ resources:
   - deployment.yaml
   - service.yaml
 
-commonLabels:
-  app: ott-users
-  managed-by: argocd
+labels:
+  - pairs:
+      app: ott-users
+      managed-by: argocd
