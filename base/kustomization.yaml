@@ -8,5 +8,10 @@ resources:
   - secret/db-secret.yaml
   - secret/keycloak-secret.yaml
   - ingress.yaml
-  - backend-api
-  - user-service
+  - backend-api/serviceaccount.yaml
+  - backend-api/configmap.yaml
+  - backend-api/secret.yaml
+  - backend-api/deployment.yaml
+  - backend-api/service.yaml
+  - user-service/deployment.yaml
+  - user-service/service.yaml
