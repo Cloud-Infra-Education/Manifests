@@ -8,7 +8,6 @@ resources:
   - deployment.yaml
   - service.yaml
 
-labels:
-  - pairs:
-      app: backend-api
-      managed-by: argocd
+commonLabels:
+  app: backend-api
+  managed-by: argocd
