@@ -32,14 +32,14 @@ jobs:
 
       - name: Validate YAML syntax
         run: |
-          echo "🔍 Validating YAML files..."
+          echo "Validating YAML files..."
           find . -name "*.yaml" -o -name "*.yml" | while read file; do
             echo "Checking: $file"
             python3 -c "import yaml; list(yaml.safe_load_all(open('$file')))" || exit 1
           done
-          echo "✅ All YAML files are valid!"
+          echo "All YAML files are valid!"
 
-      # ================= [2] Kubernetes YAML 검증 (kubectl) =================
+      # ================= [2] Kubernetes YAML 검증 =================
       - name: Setup kubectl
         uses: azure/setup-kubectl@v3
         with:
@@ -47,42 +47,39 @@ jobs:
 
       - name: Validate Kubernetes manifests
         run: |
-          echo "🔍 Validating Kubernetes manifests..."
+          echo "Validating Kubernetes manifests..."
           find base -name "*.yaml" -o -name "*.yml" | while read file; do
             echo "Validating: $file"
             # kubectl dry-run이 실패해도 계속 진행 (일부 파일은 Kubernetes 매니페스트가 아닐 수 있음)
             kubectl apply --dry-run=client -f "$file" 2>&1 || echo "⚠️ Skipping non-Kubernetes file: $file"
           done
-          echo "✅ Kubernetes manifests validation completed!"
+          echo "Kubernetes manifests validation completed!"
 
       # ================= [3] Trivy 보안 스캔 단계 =================
-      # Kubernetes 매니페스트 파일의 보안 취약점을 검사합니다.
       - name: Run Trivy vulnerability scanner (Filesystem)
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs'          # 파일 시스템 전체를 스캔
-          scan-ref: '.'            # 현재 경로 기준
-          format: 'table'          # 결과를 테이블 형태로 출력
-          severity: 'CRITICAL,HIGH' # 치명적(Critical), 높음(High) 취약점 감지
-          exit-code: '0'           # 취약점 발견해도 경고만 표시 (배포 계속 진행)
-        continue-on-error: true    # 오류가 있어도 다음 단계 계속 진행
+          scan-type: 'fs'        
+          scan-ref: '.'          
+          format: 'table'         
+          severity: 'CRITICAL,HIGH' 
+          exit-code: '0'         
+        continue-on-error: true    
 
-      # ================= [4] Trivy Config 스캔 (Kubernetes 설정 파일) =================
+      # ================= [4] Trivy Config 스캔  =================
       - name: Run Trivy config scanner (Kubernetes)
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'config'      # 설정 파일 스캔
-          scan-ref: 'base/'        # base 디렉토리의 Kubernetes 매니페스트
+          scan-type: 'config'    
+          scan-ref: 'base/'    
           format: 'table'
           severity: 'CRITICAL,HIGH'
-          exit-code: '0'           # 취약점 발견해도 경고만 표시 (배포 계속 진행)
-        continue-on-error: true    # 오류가 있어도 다음 단계 계속 진행
+          exit-code: '0'     
+        continue-on-error: true  
 
-      # ================= [참고] ArgoCD 자동 배포 =================
-      # ArgoCD가 Git 저장소를 모니터링하고 있어서,
-      # 이 워크플로우가 성공하면 자동으로 ArgoCD가 변경사항을 감지하여 배포합니다.
+      # ================= ArgoCD 자동 배포 =================
       - name: Workflow completed
         run: |
-          echo "✅ All validations passed!"
-          echo "📦 ArgoCD will automatically detect and deploy the changes."
-          echo "🔗 Check ArgoCD Application status after push."
+          echo "All validations passed!"
+          echo "ArgoCD will automatically detect and deploy the changes."
+          echo "Check ArgoCD Application status after push."
