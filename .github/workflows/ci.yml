@@ -35,7 +35,7 @@ jobs:
           echo "🔍 Validating YAML files..."
           find . -name "*.yaml" -o -name "*.yml" | while read file; do
             echo "Checking: $file"
-            python3 -c "import yaml; yaml.safe_load(open('$file'))" || exit 1
+            python3 -c "import yaml; list(yaml.safe_load_all(open('$file')))" || exit 1
           done
           echo "✅ All YAML files are valid!"
 
