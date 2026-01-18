@@ -12,4 +12,3 @@ resources:
   - ingress.yaml
   - backend-api
   - user-service
-test
