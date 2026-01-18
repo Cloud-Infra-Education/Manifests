@@ -21,4 +21,4 @@ data:
   DB_NAME: "ott_db"
   S3_BUCKET_NAME: "yuh-team-formation-lap-origin-s3-404457776061"
   S3_REGION: "ap-northeast-2"
-  CLOUDFRONT_DOMAIN: "www.exampleott.click"
+  CLOUDFRONT_DOMAIN: "www.matchacake.click"

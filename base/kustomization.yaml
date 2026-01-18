@@ -11,4 +11,5 @@ resources:
   - secret/keycloak-secret.yaml
   - ingress.yaml
   - backend-api
-  - user-service
+  - user-service/deployment.yaml
+  - user-service/service.yaml
