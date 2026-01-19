@@ -7,7 +7,7 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/load-balancer-name: matchacake-alb-test-seoul
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:087730891580:certificate/4f13064a-8543-41f1-abcc-d2ca07f7584e
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:404457776061:certificate/e74ad197-4d43-4ef7-b29b-9f82a87b8b0c
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
 spec:
@@ -57,17 +57,17 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
-          - path: /users
-            pathType: Prefix
-            backend:
-              service:
-                name: user-service
-                port:
-                  number: 8000
-          - path: /keycloak
-            pathType: Prefix
-            backend:
-              service:
-                name: keycloak-service
-                port:
-                  number: 8080
+          # - path: /users
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: user-service
+          #       port:
+          #         number: 8000
+          # - path: /keycloak
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: keycloak-service
+          #       port:
+          #         number: 8080

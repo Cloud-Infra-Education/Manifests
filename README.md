@@ -35,14 +35,14 @@ base/
 ### Backend API
 - **Deployment**: `backend-api`
 - **Service**: `backend-api-service`
-- **이미지**: `087730891580.dkr.ecr.ap-northeast-2.amazonaws.com/backend-api:latest`
+- **이미지**: `404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/backend-api:latest`
 - **포트**: 8000
 - **Replicas**: 2
 - **외부 접근 경로**:
-  - `https://api.exampleott.click/api/v1/*` - API 엔드포인트
-  - `https://api.exampleott.click/docs` - API 문서
-  - `https://api.exampleott.click/api/docs` - OpenAPI 문서
-  - `https://api.exampleott.click/api/openapi.json` - OpenAPI JSON
+  - `https://api.formationp.com/api/v1/*` - API 엔드포인트
+  - `https://api.formationp.com/docs` - API 문서
+  - `https://api.formationp.com/api/docs` - OpenAPI 문서
+  - `https://api.formationp.com/api/openapi.json` - OpenAPI JSON
 - **기능**:
   - FastAPI 기반 REST API
   - Keycloak 통합 (JWT 인증)
@@ -53,11 +53,11 @@ base/
 ### User Service
 - **Deployment**: `ott-users`
 - **Service**: `user-service`
-- **이미지**: `087730891580.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service:v4`
+- **이미지**: `404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service:latest`
 - **포트**: 8000
 - **Replicas**: 1
 - **외부 접근 경로**:
-  - `https://api.exampleott.click/users/*` - 사용자 서비스 엔드포인트
+  - `https://api.formationp.com/users/*` - 사용자 서비스 엔드포인트
 - **기능**:
   - 사용자 관리 서비스
   - 데이터베이스 연동
@@ -67,7 +67,7 @@ base/
 - **Service**: `keycloak-service`
 - **포트**: 8080
 - **외부 접근 경로**:
-  - `https://api.exampleott.click/keycloak/*` - Keycloak 관리 콘솔 및 API
+  - `https://api.formationp.com/keycloak/*` - Keycloak 관리 콘솔 및 API
 - **기능**: 인증 및 인가 서버
 
 ### Meilisearch
@@ -82,7 +82,7 @@ base/
 - **Ingress Controller**: AWS Load Balancer Controller (ALB)
 - **Load Balancer**: `matchacake-alb-test-seoul`
 - **HTTPS**: 활성화 (포트 443)
-- **SSL 인증서**: ACM 인증서 (api.exampleott.click)
+- **SSL 인증서**: ACM 인증서 (api.formationp.com)
 - **HTTP → HTTPS 리다이렉트**: 활성화
 
 ### 외부 접근 경로
@@ -97,7 +97,7 @@ base/
 | `/keycloak/*` | keycloak-service | Keycloak 관리 콘솔 |
 
 ### 도메인
-- **API 도메인**: `api.exampleott.click`
+- **API 도메인**: `api.formationp.com`
 - **Global Accelerator**: 활성화됨
 
 ## 🔧 ArgoCD 연동
