@@ -53,7 +53,7 @@ base/
 ### User Service
 - **Deployment**: `ott-users`
 - **Service**: `user-service`
-- **이미지**: `087730891580.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service:v4`
+- **이미지**: `404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/user-service:latest`
 - **포트**: 8000
 - **Replicas**: 1
 - **외부 접근 경로**:
