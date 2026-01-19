@@ -1,10 +1,13 @@
+---
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
-  name: db-config
+  name: backend-secrets
   namespace: formation-lap
-data:
-  DB_HOST: "y2om-formation-lap-kor-rds-proxy.proxy-c902seqsaaps.ap-northeast-2.rds.amazonaws.com"
-  DB_USER: "proxy_admin"
-  DB_NAME: "ott_db"
-  REGION_NAME: "ap-northeast-2"
+type: Opaque
+stringData:
+  KEYCLOAK_CLIENT_SECRET: ""
+  KEYCLOAK_ADMIN_USERNAME: "admin"
+  KEYCLOAK_ADMIN_PASSWORD: "admin"
+  MEILISEARCH_API_KEY: "masterKey1234567890"
+  DATABASE_URL: "<DATABASE_URL>"  # RDS Proxy 엔드포인트 사용 (Terraform에서 생성된 값)

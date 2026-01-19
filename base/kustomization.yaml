@@ -4,14 +4,13 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - configmap/db-config.yaml
-  - configmap/keycloak-config.yaml
   - secret/db-secret.yaml
-  - secret/keycloak-secret.yaml
   - ingress.yaml
   - backend-api/serviceaccount.yaml
-  - backend-api/configmap.yaml
+  # - backend-api/configmap.yaml  # ?? Terraform에서 backend-config ConfigMap 생성 (중복 방지)
   - backend-api/secret.yaml
   - backend-api/deployment.yaml
   - backend-api/service.yaml
   - user-service/deployment.yaml
   - user-service/service.yaml
+

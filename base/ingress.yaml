@@ -6,22 +6,17 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/load-balancer-name: matchacake-alb-test-seoul
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:404457776061:certificate/c079332b-3209-436f-84f2-17bdd131ad23
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/load-balancer-name: <ALB_NAME>  # ALB 이름 (예: matchacake-alb-test-seoul)
+    alb.ingress.kubernetes.io/wafv2-acl-arn: <WAF_WEB_ACL_ARN>  # Terraform에서 생성한 WAF ARN
+    alb.ingress.kubernetes.io/certificate-arn: <ACM_CERTIFICATE_ARN>  # Terraform에서 생성한 ACM 인증서 ARN
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
 spec:
   ingressClassName: alb
   rules:
     - http:
         paths:
-          - path: /api/docs
-            pathType: Exact
-            backend:
-              service:
-                name: backend-api-service
-                port:
-                  number: 8000
+          # Backend API - OpenAPI JSON (Exact 매치, 먼저 처리)
           - path: /api/openapi.json
             pathType: Exact
             backend:
@@ -29,6 +24,15 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
+          # Backend API - OpenAPI 문서 (Prefix 매치)
+          - path: /api/docs
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-api-service
+                port:
+                  number: 8000
+          # Backend API - API v1 엔드포인트 (Prefix 매치)
           - path: /api/v1
             pathType: Prefix
             backend:
@@ -36,6 +40,7 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
+          # Backend API - FastAPI 문서 (Prefix 매치)
           - path: /docs
             pathType: Prefix
             backend:
@@ -43,6 +48,7 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
+          # Backend API - OpenAPI JSON (루트 경로, Exact 매치)
           - path: /openapi.json
             pathType: Exact
             backend:
@@ -50,13 +56,7 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
-          - path: /videos
-            pathType: Prefix
-            backend:
-              service:
-                name: backend-api-service
-                port:
-                  number: 8000
+          # User Service - 사용자 서비스 (Prefix 매치)
           - path: /users
             pathType: Prefix
             backend:
@@ -64,6 +64,7 @@ spec:
                 name: user-service
                 port:
                   number: 8000
+          # Keycloak - 인증 서비스 (Prefix 매치)
           - path: /keycloak
             pathType: Prefix
             backend:
