@@ -1,74 +1,42 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: msa-ingress
+  name: formation-lap-ingress
   namespace: formation-lap
   annotations:
+    # ALB 생성 및 외부 노출 설정
+    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/load-balancer-name: <ALB_NAME>  # ALB 이름 (예: matchacake-alb-test-seoul)
-    alb.ingress.kubernetes.io/wafv2-acl-arn: <WAF_WEB_ACL_ARN>  # Terraform에서 생성한 WAF ARN
-    alb.ingress.kubernetes.io/certificate-arn: <ACM_CERTIFICATE_ARN>  # Terraform에서 생성한 ACM 인증서 ARN
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
-    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    
+    # HTTPS 설정 및 유희님이 확인해주신 인증서 ARN
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:087730891580:certificate/4f13064a-8543-41f1-abcc-d2ca07f7584e
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    
+    # 상태 확인 경로 (필요 시 수정)
+    alb.ingress.kubernetes.io/healthcheck-path: /health
+    alb.ingress.kubernetes.io/success-codes: '200'
+
 spec:
   ingressClassName: alb
   rules:
     - http:
         paths:
-          # Backend API - OpenAPI JSON (Exact 매치, 먼저 처리)
-          - path: /api/openapi.json
-            pathType: Exact
-            backend:
-              service:
-                name: backend-api-service
-                port:
-                  number: 8000
-          # Backend API - OpenAPI 문서 (Prefix 매치)
-          - path: /api/docs
-            pathType: Prefix
-            backend:
-              service:
-                name: backend-api-service
-                port:
-                  number: 8000
-          # Backend API - API v1 엔드포인트 (Prefix 매치)
-          - path: /api/v1
-            pathType: Prefix
-            backend:
-              service:
-                name: backend-api-service
-                port:
-                  number: 8000
-          # Backend API - FastAPI 문서 (Prefix 매치)
-          - path: /docs
-            pathType: Prefix
-            backend:
-              service:
-                name: backend-api-service
-                port:
-                  number: 8000
-          # Backend API - OpenAPI JSON (루트 경로, Exact 매치)
-          - path: /openapi.json
-            pathType: Exact
-            backend:
-              service:
-                name: backend-api-service
-                port:
-                  number: 8000
-          # User Service - 사용자 서비스 (Prefix 매치)
+          # 유저 서비스 라우팅
           - path: /users
             pathType: Prefix
             backend:
               service:
-                name: user-service
+                name: user-service  # 여기는 '참조'만 하는 것이라 중복 에러가 나지 않습니다.
                 port:
-                  number: 8000
-          # Keycloak - 인증 서비스 (Prefix 매치)
-          - path: /keycloak
+                  number: 80
+          
+          # 백엔드 API 라우팅 (필요 시 추가)
+          - path: /api
             pathType: Prefix
             backend:
               service:
-                name: keycloak-service
+                name: backend-api
                 port:
-                  number: 8080
+                  number: 80
