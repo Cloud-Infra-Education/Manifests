@@ -5,6 +5,8 @@ resources:
   - ../base
 
 images:
-  - name: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
-    newTag: v5
+  - name: 570795932693.dkr.ecr.ap-northeast-2.amazonaws.com/user-service
+    newTag: latest
+  - name: 570795932693.dkr.ecr.ap-northeast-2.amazonaws.com/backend-api
+    newTag: latest
 
