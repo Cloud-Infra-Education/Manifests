@@ -6,9 +6,9 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/load-balancer-name: <ALB_NAME>  # ALB ÀÌ¸§ (¿¹: matchacake-alb-test-seoul)
-    alb.ingress.kubernetes.io/wafv2-acl-arn: <WAF_WEB_ACL_ARN>  # Terraform¿¡¼­ »ı¼ºÇÑ WAF ARN
-    alb.ingress.kubernetes.io/certificate-arn: <ACM_CERTIFICATE_ARN>  # Terraform¿¡¼­ »ı¼ºÇÑ ACM ÀÎÁõ¼­ ARN
+    alb.ingress.kubernetes.io/load-balancer-name: <ALB_NAME>  # ALB Ã€ÃŒÂ¸Â§ (Â¿Â¹: matchacake-alb-test-seoul)
+    alb.ingress.kubernetes.io/wafv2-acl-arn: <WAF_WEB_ACL_ARN>  # TerraformÂ¿Â¡Â¼Â­ Â»Ã½Â¼ÂºÃ‡Ã‘ WAF ARN
+    alb.ingress.kubernetes.io/certificate-arn: <ACM_CERTIFICATE_ARN>  # TerraformÂ¿Â¡Â¼Â­ Â»Ã½Â¼ÂºÃ‡Ã‘ ACM Ã€ÃÃÃµÂ¼Â­ ARN
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
     alb.ingress.kubernetes.io/ssl-redirect: "443"
 spec:
@@ -16,7 +16,7 @@ spec:
   rules:
     - http:
         paths:
-          # Backend API - OpenAPI JSON (Exact ¸ÅÄ¡, ¸ÕÀú Ã³¸®)
+          # Backend API - OpenAPI JSON (Exact Â¸Ã…Ã„Â¡, Â¸Ã•Ã€Ãº ÃƒÂ³Â¸Â®)
           - path: /api/openapi.json
             pathType: Exact
             backend:
@@ -24,7 +24,7 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
-          # Backend API - OpenAPI ¹®¼­ (Prefix ¸ÅÄ¡)
+          # Backend API - OpenAPI Â¹Â®Â¼Â­ (Prefix Â¸Ã…Ã„Â¡)
           - path: /api/docs
             pathType: Prefix
             backend:
@@ -32,7 +32,7 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
-          # Backend API - API v1 ¿£µåÆ÷ÀÎÆ® (Prefix ¸ÅÄ¡)
+          # Backend API - API v1 Â¿Â£ÂµÃ¥Ã†Ã·Ã€ÃÃ†Â® (Prefix Â¸Ã…Ã„Â¡)
           - path: /api/v1
             pathType: Prefix
             backend:
@@ -40,7 +40,7 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
-          # Backend API - FastAPI ¹®¼­ (Prefix ¸ÅÄ¡)
+          # Backend API - FastAPI Â¹Â®Â¼Â­ (Prefix Â¸Ã…Ã„Â¡)
           - path: /docs
             pathType: Prefix
             backend:
@@ -48,7 +48,7 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
-          # Backend API - OpenAPI JSON (·çÆ® °æ·Î, Exact ¸ÅÄ¡)
+          # Backend API - OpenAPI JSON (Â·Ã§Ã†Â® Â°Ã¦Â·Ã, Exact Â¸Ã…Ã„Â¡)
           - path: /openapi.json
             pathType: Exact
             backend:
@@ -56,7 +56,7 @@ spec:
                 name: backend-api-service
                 port:
                   number: 8000
-          # User Service - »ç¿ëÀÚ ¼­ºñ½º (Prefix ¸ÅÄ¡)
+          # User Service - Â»Ã§Â¿Ã«Ã€Ãš Â¼Â­ÂºÃ±Â½Âº (Prefix Â¸Ã…Ã„Â¡)
           - path: /users
             pathType: Prefix
             backend:
@@ -64,7 +64,7 @@ spec:
                 name: user-service
                 port:
                   number: 8000
-          # Keycloak - ÀÎÁõ ¼­ºñ½º (Prefix ¸ÅÄ¡)
+          # Keycloak - Ã€ÃÃÃµ Â¼Â­ÂºÃ±Â½Âº (Prefix Â¸Ã…Ã„Â¡)
           - path: /keycloak
             pathType: Prefix
             backend:

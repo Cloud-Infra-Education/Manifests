@@ -19,6 +19,6 @@ data:
   MEILISEARCH_URL: "http://meilisearch-service:7700"
   DB_PORT: "3306"
   DB_NAME: "ott_db"
-  S3_BUCKET_NAME: "yuh-team-formation-lap-origin-s3-404457776061"
+  S3_BUCKET_NAME: "yuh-team-formation-lap-origin-s3-570795932693"
   S3_REGION: "ap-northeast-2"
   CLOUDFRONT_DOMAIN: "www.matchacake.click"

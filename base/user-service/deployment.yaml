@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: ott-users
-          image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/user-service:v4
+          image: 570795932693.dkr.ecr.ap-northeast-2.amazonaws.com/user-service:v4
           command: ["uvicorn"]
           args:
             - main:app
