@@ -19,7 +19,7 @@ spec:
       serviceAccountName: backend-api-sa
       containers:
       - name: backend-api
-        image: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/backend-api:da3c0f679a1cd2523b3b3dd782779bdbe1e45a1a
+        image: 570795932693.dkr.ecr.ap-northeast-2.amazonaws.com/backend-api:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
@@ -29,6 +29,14 @@ spec:
             name: backend-config
         - secretRef:
             name: backend-secrets
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1000
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop:
+              - ALL
         resources:
           requests:
             cpu: 200m
