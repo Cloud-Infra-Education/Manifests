@@ -1,13 +1,10 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ott-users
-  labels:
-    app: ott-users
-    managed-by: argocd
+  namespace: formation-lap
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: ott-users
@@ -18,14 +15,13 @@ spec:
     spec:
       containers:
         - name: ott-users
-          image: 570795932693.dkr.ecr.ap-northeast-2.amazonaws.com/user-service:v4
+          image: 570795932693.dkr.ecr.ap-northeast-2.amazonaws.com/user-service:latest
+          
+          # [1] 실행 명령어 명시 (FastAPI/Uvicorn 기준)
           command: ["uvicorn"]
-          args:
-            - main:app
-            - --host
-            - "0.0.0.0"
-            - --port
-            - "8000"
+          args: ["main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+          # [2] 환경 변수 통합 (ConfigMap + Secret)
           envFrom:
             - configMapRef:
                 name: db-config
@@ -35,31 +31,35 @@ spec:
                 name: db-secret
             - secretRef:
                 name: keycloak-secret
+
           ports:
             - containerPort: 8000
-              name: http
-              protocol: TCP
+
+          # [3] 리소스 제한 (노드 자원 보호)
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "250m"
+              cpu: "100m"
+              memory: "128Mi"
             limits:
-              memory: "512Mi"
-              cpu: "500m"
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
+              cpu: "250m"
+              memory: "256Mi"
+
+          # [4] 상태 확인 (고가용성 확보)
           livenessProbe:
             httpGet:
               path: /health
               port: 8000
             initialDelaySeconds: 30
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 3
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1000
 

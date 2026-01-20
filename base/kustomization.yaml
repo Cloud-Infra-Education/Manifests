@@ -7,7 +7,7 @@ resources:
   - configmap/keycloak-config.yaml
   - secret/db-secret.yaml
   - secret/keycloak-secret.yaml
-  - ingress.yaml
+  # - ingress.yaml  # Terraform에서 msa-ingress 생성 (중복 방지)
   - backend-api/serviceaccount.yaml
   # - backend-api/configmap.yaml  # Terraform에서 backend-config ConfigMap 생성 (중복 방지)
   - backend-api/secret.yaml
