@@ -3,7 +3,7 @@
 ## 문제
 Manifests의 kustomization.yaml에 AWS 계정 ID가 하드코딩되어 있습니다:
 ```yaml
-- name: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
+- name: 570795932693.dkr.ecr.ap-northeast-2.amazonaws.com/user-service
 ```
 
 ## 해결 방법

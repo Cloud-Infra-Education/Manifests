@@ -3,8 +3,13 @@ kind: Kustomization
 
 resources:
   - ../base
+  # 계정 ID 관련 오버라이드 파일들
+  - backend-api/serviceaccount.yaml
+  - backend-api/configmap.yaml
 
 images:
-  - name: 404457776061.dkr.ecr.ap-northeast-2.amazonaws.com/y2om-user-service
-    newTag: v5
+  - name: 570795932693.dkr.ecr.ap-northeast-2.amazonaws.com/user-service
+    newTag: latest
+  - name: 570795932693.dkr.ecr.ap-northeast-2.amazonaws.com/backend-api
+    newTag: latest
 

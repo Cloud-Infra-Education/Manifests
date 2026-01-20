@@ -4,13 +4,14 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - configmap/db-config.yaml
+  - configmap/keycloak-config.yaml
   - secret/db-secret.yaml
-  - ingress.yaml
+  - secret/keycloak-secret.yaml
+  # - ingress.yaml  # Terraform鞐愳劀 msa-ingress 靸濎劚 (欷戨车 氚╈)
   - backend-api/serviceaccount.yaml
-  # - backend-api/configmap.yaml  # ?? Terraform俊辑 backend-config ConfigMap 积己 (吝汗 规瘤)
+  # - backend-api/configmap.yaml  # Terraform鞐愳劀 backend-config ConfigMap 靸濎劚 (欷戨车 氚╈)
   - backend-api/secret.yaml
   - backend-api/deployment.yaml
   - backend-api/service.yaml
   - user-service/deployment.yaml
   - user-service/service.yaml
-

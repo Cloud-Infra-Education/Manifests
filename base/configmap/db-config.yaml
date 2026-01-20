@@ -10,4 +10,4 @@ stringData:
   KEYCLOAK_ADMIN_USERNAME: "admin"
   KEYCLOAK_ADMIN_PASSWORD: "admin"
   MEILISEARCH_API_KEY: "masterKey1234567890"
-  DATABASE_URL: "<DATABASE_URL>"  # RDS Proxy ¿£µåÆ÷ÀÎÆ® »ç¿ë (Terraform¿¡¼­ »ý¼ºµÈ °ª)
+  DATABASE_URL: "<DATABASE_URL>"  # RDS Proxy Â¿Â£ÂµÃ¥Ã†Ã·Ã€ÃŽÃ†Â® Â»Ã§Â¿Ã« (TerraformÂ¿Â¡Â¼Â­ Â»Ã½Â¼ÂºÂµÃˆ Â°Âª)
